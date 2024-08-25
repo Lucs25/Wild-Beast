@@ -9,15 +9,16 @@
 }
 
 :root {
-  --background-primary: linear-gradient(135deg, #8844ee, #a780ef);
+  --background-primary: linear-gradient(135deg, #181818, #a3a3a3);
   --color-primary: #fff;
-  --color-secondary: #b07dfb;
+  --color-secondary: #a5a5a7;
 }
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   border-radius: 5px;
+  filter: var(--color-secondary);
 }
 
 .estrutura {
@@ -117,7 +118,14 @@ img {
   grid-template-rows: 250px 250px;
   align-content: start;
   padding: 30px;
-  gap: 100px;
+  gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+img[alt='Anuncio 1']:hover,
+img[alt='Anuncio 2']:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .citacao p {
@@ -146,7 +154,7 @@ img {
 }
 
 .atributos li + li {
-  border-top: 2px solid #b07dfb;
+  border-top: 2px solid var(--color-secondary);
 }
 
 .destaque {
@@ -242,12 +250,69 @@ p {
 
 @media (max-width: 760px) {
   .estrutura {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
     grid-template-areas:
       'header '
       'sidenav'
       'content'
       'anuncios'
       'footer';
+  }
+  .header {
+    grid-template-columns: auto;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+
+  .header nav a {
+    font-size: 1rem;
+  }
+
+  .header li + li {
+    margin-left: 10px;
+  }
+
+  .sidenav {
+    padding: 0 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    position: relative;
+  }
+
+  @keyframes seta {
+    from {
+      right: 30px;
+    }
+    to {
+      right: 20px;
+    }
+  }
+
+  .sidenav::after {
+    content: '→';
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    animation: seta 5s ease-in 0s infinite alternate;
+  }
+
+  .sidenav ul {
+    display: flex;
+  }
+
+  .sidenav li {
+    flex: 1 0 60px;
+  }
+
+  .sidenav li a {
+    margin: 30px 30px 30px 0;
+  }
+}
+
+@media (max-width: 610px) {
+  .content {
+    grid-template-columns: auto;
   }
 }
